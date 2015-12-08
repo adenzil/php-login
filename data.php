@@ -37,7 +37,7 @@ session_start();
 
 </br></br></br>
 
-<script>var count=1;;</script>
+<script>var count=1;</script>
 
 <div id="mid">
 
