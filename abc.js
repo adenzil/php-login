@@ -71,10 +71,6 @@ jQuery(document).ready(function() {
 			       }
 			 });
 
-		//3$('.overlay-bg, .overlay-content').hide(); //hide the overlay
-
-
-
 });
 
 $("body").on("keyup", "#searchhere", function(e){
@@ -99,9 +95,7 @@ $("body").on("keyup", "#searchhere", function(e){
 			       		{
 			       			$("#result").append("<b><u>User id </u></b>: "+result[cc]+"      "+"<b><u>first name </u></b>: "+result[cc+1]+"</br>");
 			       			cc=cc+2;
-			       		}
-			       		//console.log(result);
-			       		
+			       		}	
 			       }
 
 			});
@@ -132,109 +126,103 @@ $("body").on("keyup", "#searchhere", function(e){
 
 
 
-	$("body").on("click", ".edit", function(){
+		$("body").on("click", ".edit", function(){
 
-       // $("#edit"+this.id).attr("contenteditable","true");
-	    $("#edit"+this.id).css('background', 'red');
-	    $("#edit"+this.id).css('color', 'white');
+	    	$("#edit"+this.id).css('background', 'red');
+	    	$("#edit"+this.id).css('color', 'white');
+	   		var id = document.getElementById("users").rows[this.id].cells[0].innerHTML;
 
+		    $.ajax({
+		       type: "POST",
+		       url: 'connection.php/abc',
+		       data:{action:'call_this', data: id},
+				       success:function(data) {
 
+				             var result = JSON.parse(data);
+				             
+				             if(result[0]=="1")
+				             {
+				             	alert("log in to continue");
+				             }
 
-	    var id = document.getElementById("users").rows[this.id].cells[0].innerHTML;
+				             else{
+				             		if(result[0]=="")
+				             		{
+				             			$("#editfirstname").attr("placeholder", "enter first name here");
+				             		}
+				             		else{
+				             			$("#editfirstname").val(result[0]);
+				             		}
 
-	    $.ajax({
-	       type: "POST",
-	       url: 'connection.php/abc',
-	       data:{action:'call_this', data: id},
-			       success:function(data) {
+				             		if(result[1]=="")
+				             		{
+				             			$("#editfirstname").attr("placeholder", "enter first name here");
+				             		}
+				             		else{
+				            			$("#editlastname").val(result[1]);
+				            		}
 
-			       	//alert(data);
+				            		if(result[2]=="mobile")
+				            		{
+				            			$("#num").val('mobile');
+				            		}
+				            		else{
+				            			$("#num").val('landline');
+				            		}
 
-			             var result = JSON.parse(data);
-			             
-			             if(result[0]=="1")
-			             {
-			             	alert("log in to continue");
-			             }
+				            		if(result[3]=="")
+				            		{
+				            			$("#number").attr("placeholder", "enter number here");
+				            		}
+				            		else{
+				            			$("#number").val(result[3]);
+				            		}
 
-			             else{
-			             		if(result[0]=="")
-			             		{
-			             			$("#editfirstname").attr("placeholder", "enter first name here");
-			             		}
-			             		else{
-			             			$("#editfirstname").val(result[0]);
-			             		}
+				            		if(result[4]=="permanent")
+				            		{
+				            			$("#house").val('permanent');
+				            		}
+				            		else{
+				            			$("#house").val('temporary');
+				            		}
 
-			             		if(result[1]=="")
-			             		{
-			             			$("#editfirstname").attr("placeholder", "enter first name here");
-			             		}
-			             		else{
-			            			$("#editlastname").val(result[1]);
-			            		}
+				            		if(result[5]=="")
+				            		{
+				            			$("#buildingname").attr("placeholder", "enter building name here");
+				            		}
+				            		else{
+				            			$("#buildingname").val(result[5]);
+				            		}
 
-			            		if(result[2]=="mobile")
-			            		{
-			            			$("#num").val('mobile');
-			            		}
-			            		else{
-			            			$("#num").val('landline');
-			            		}
+				            		if(result[6]=="")
+				            		{
+				            			$("#streetname").attr("placeholder", "enter street name here");
+				            		}
+				            		else{
+				            			$("#streetname").val(result[6]);
+				            		}
 
-			            		if(result[3]=="")
-			            		{
-			            			$("#number").attr("placeholder", "enter number here");
-			            		}
-			            		else{
-			            			$("#number").val(result[3]);
-			            		}
+				            		if(result[6]=="")
+				            		{
 
-			            		if(result[4]=="permanent")
-			            		{
-			            			$("#house").val('permanent');
-			            		}
-			            		else{
-			            			$("#house").val('temporary');
-			            		}
+				            		}
+				            		else{
 
-			            		if(result[5]=="")
-			            		{
-			            			$("#buildingname").attr("placeholder", "enter building name here");
-			            		}
-			            		else{
-			            			$("#buildingname").val(result[5]);
-			            		}
+				            		}
 
-			            		if(result[6]=="")
-			            		{
-			            			$("#streetname").attr("placeholder", "enter street name here");
-			            		}
-			            		else{
-			            			$("#streetname").val(result[6]);
-			            		}
+				            		if(result[7]=="")
+				            		{
 
-			            		if(result[6]=="")
-			            		{
+				            		}
+				            		else{
 
-			            		}
-			            		else{
-
-			            		}
-
-			            		if(result[7]=="")
-			            		{
-
-			            		}
-			            		else{
-
-			            		}
+				            		}
 
 
-			         		}
+				         		}
 
-			           }
-	    		});
+				           }
+		    		});
 
 
    		 });
@@ -244,7 +232,6 @@ $("body").on("keyup", "#searchhere", function(e){
 $.ajax({
 	       type: "POST",
 	       url: 'connection.php',
-	       //dataType: 'json',
 	       data:{action:'loadtable'},
 			       success:function(data) {
 			       var r = JSON.parse(data);
