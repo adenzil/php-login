@@ -118,7 +118,7 @@ if($_POST['action'] == 'search') {
     //$row = mysql_fetch_array($result1);
 
   if($result1 === FALSE) { 
-        die(mysql_error()); // TODO: better error handling
+        die(mysql_error());
     }
 
     while($row = mysql_fetch_array($result1))
@@ -151,7 +151,7 @@ if($_POST['action'] == 'delete') {
 
     $result2 = mysql_query("DELETE users FROM users WHERE users.id = $id");
 
-    echo "done";
+    echo "user deleted";
 
     
 }

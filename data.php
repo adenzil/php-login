@@ -52,7 +52,7 @@ session_start();
 	</div>
 
 	<div id="midright">
-		<!-- <button onclick="myFunction(count,'',count++)" id="adduser">Add user</button> -->
+		
 		<div class="main-content">
     		<a class="show-popup" href="#" data-showpopup="1" >Add new user</a>
 		</div>

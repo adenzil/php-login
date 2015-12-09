@@ -1,21 +1,22 @@
 <?php
-session_start();
-$message="";
-if(count($_POST)>0) {
-$conn = mysql_connect("127.0.0.1","root","root");
-mysql_select_db("project",$conn);
-$result = mysql_query("SELECT * FROM users WHERE name='" . $_POST["user_name"] . "' and password = '". $_POST["password"]."'");
-$row  = mysql_fetch_array($result);
-if(is_array($row)) {
-$_SESSION["user_id"] = $row[id];
-$_SESSION["user_name"] = $row[name];
-} else {
-$message = "Invalid Username or Password!";
-}
-}
-if(isset($_SESSION["user_id"])) {
-header("Location:data.php");
-}
+	session_start();
+	$message="";
+	if(count($_POST)>0) {
+		$conn = mysql_connect("127.0.0.1","root","root");
+		mysql_select_db("project",$conn);
+		$result = mysql_query("SELECT * FROM users WHERE name='" . $_POST["user_name"] . "' and password = '". $_POST["password"]."'");
+		$row  = mysql_fetch_array($result);
+		if(is_array($row)) {
+			$_SESSION["user_id"] = $row[id];
+			$_SESSION["user_name"] = $row[name];
+		}
+		else {
+			$message = "Invalid Username or Password!";
+	}
+	}
+	if(isset($_SESSION["user_id"])) {
+		header("Location:data.php");
+	}
 ?>
 <html>
 <head>
