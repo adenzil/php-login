@@ -68,14 +68,11 @@ if($_POST['action'] == 'adduser') {
 
     $result1 = mysql_query("INSERT INTO users (name, password) VALUES (\"$result[0]\", \"$result[7]\");");
 
-    // $result2 = mysql_query("SELECT id from users where name=$result[0] and password=$result[7]");
-    // $rows = mysql_fetch_assoc($result2);
-    // $id = $rows['id'];
 
     $result2 = mysql_query("SELECT id from users where name=\"$result[0]\" and password=\"$result[7]\";");
 
   if($result2 === FALSE) { 
-        die(mysql_error()); // TODO: better error handling
+        die(mysql_error());
     }
 
     while($row = mysql_fetch_array($result2))
@@ -90,8 +87,6 @@ if($_POST['action'] == 'adduser') {
     $result5 = mysql_query("INSERT INTO user_add (id, type, building_name, street_name) VALUES (\"$id\", \"$result[4]\", \"$result[5]\", \"$result[6]\")");
 
     echo $result[0];
-    //$firstname = $data[0];
-    //echo ($data[0]);
 
 }
 
@@ -115,7 +110,7 @@ if($_POST['action'] == 'search') {
     $result = array();
 
     $result1 = mysql_query("SELECT distinct user_name.firstname, user_name.id from user_name inner join user_add on user_name.id=user_add.id where $c=\"$search\"");
-    //$row = mysql_fetch_array($result1);
+
 
   if($result1 === FALSE) { 
         die(mysql_error());
